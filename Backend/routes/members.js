@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const protect = require("../middleware/authMiddleware");
 
 const Member = require("../models/member.model");
 const Loan = require("../models/loan.model")
 
 //get api
-router.get("/members", async (req, res) => {
+router.get("/members", protect, async (req, res) => {
     try {
         const members = await Member.find();
         res.json(members);
